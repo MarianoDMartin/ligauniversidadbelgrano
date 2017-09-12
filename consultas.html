@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Liga Universidad de Belgrano</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="./css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="./css/formulario.css">
+</head>
+<body>
+	<div class="contenedor">
+		<header class="vertical-centered-text">
+			<div class="logo">
+				<img id="joystick" src="../img/joystick.png">
+				<h1>Liga Universidad de Belgrano</h1>
+			</div>
+			<nav>
+				<ul>
+					<a href="./index.html"><li>Inicio</li></a>
+					<a href="./inscripcion.html"><li>Inscripcion</li></a>
+					<a href="./consultas.html"><li id="actual">Consultas</li></a>
+					<a href="./index.html"><li>Información Académica</li></a>
+				</ul>
+			</nav>
+			<div class="corte"></div>
+		</header>
+		<main>
+			<form name="formMensaje" class="formInscripcion" action="./php/mensaje.php" runat="server" method="post" >
+				<ul>
+					<li>
+						<h2>Enviar un Mensaje</h2>
+						<span id="required_notification">* Datos requeridos</span>
+					</li>
+					<li>
+						<label for="nombre">Nombres</label> 
+						<input type="text" name="nombre" id="nombre" required placeholder="Juan">
+					</li>
+					<li>
+						<label for="apellido">Apellido</label> 
+						<input type="text" name="apellido" id="apellido" required placeholder="Perez">
+					</li>
+					<li>
+						<label for="email">Email</label> 
+						<input type="email" name="email" id="email"  required placeholder="email@email.com">
+					</li>
+					<li>
+						<label for="motivoMensaje">Motivo</label>
+						<select name="motivoMensaje" id="motivoMensaje">
+							<option value="1">Consulta</option>
+							<option value="2">Sugerencia</option>
+  							<option value="2">Queja</option>
+  						</select>
+					</li>
+					<li>
+						<label for="mensaje">Escriba su mensaje</label>
+						<textarea name="mensaje" cols="40" rows="7" required placeholder="Ingrese su mensaje aqui"></textarea>
+					</li>					
+					<li>
+						<button class="submit" type="submit">Enviar Mensaje</button>
+					</li>
+				</ul>
+			</form>
+		</main>
+		<footer>
+			
+		</footer>
+	</div>
+</body>
+</html>

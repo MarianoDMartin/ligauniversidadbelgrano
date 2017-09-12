@@ -6,10 +6,9 @@
 	<link rel="stylesheet" type="text/css" href="./css/estilo.css">
 	<link rel="stylesheet" type="text/css" href="./css/formulario.css">
 	<script>
-		function habilitar(value)
-		{
-			if(value=="1" || value==true)
-			{
+
+		function habilitar(value){
+			if(value=="1" || value==true){
 				// habilitamos
 				document.getElementById("equipos").disabled=false;
 			}else if(value=="2" || value==false){
@@ -18,6 +17,14 @@
 			}
 		}
 
+		function validarMotivo(form){
+			if (form.motivo.value!="1" && form.motivo.value!="2"){
+				alert('Debes seleccionar un motivo');
+				return false;
+			}else{
+				return true;
+			}
+		}
 		function validarDisponibilidad(form){ 
 			for(var i = 0; i < form.disponibilidad.length; i++){ 
 				if(form.disponibilidad[i].checked)return true; 
@@ -28,7 +35,7 @@
 
 		function validarEquipo(form){
 			debugger;
-			if(form.motivo.value==2)return true;
+			if(form.motivo.value=="2")return true;
 			indice = form.equipos.selectedIndex;
 			if( indice == null || indice == 0 ) {
 				alert('Debes seleccionar un equipo');
@@ -39,7 +46,9 @@
 		}
 
 		function validar(form){
-			if(!validarDisponibilidad(form)){
+			if(!validarMotivo(form)){
+				return false;
+			}else if(!validarDisponibilidad(form)){
 				return false;
 			}else if(!validarEquipo(form)){
 				return false;
@@ -60,10 +69,11 @@
 				<ul>
 					<a href="./index.html"><li>Inicio</li></a>
 					<a href="./inscripcion.html"><li id="actual">Inscripcion</li></a>
-					<a href="./index.html"><li>Soporte</li></a>
+					<a href="./consultas.html"><li>Consultas</li></a>
 					<a href="./index.html"><li>Información Académica</li></a>
 				</ul>
 			</nav>
+			<div class="corte"></div>
 		</header>
 		<main>
 			<form name="inscripcion" class="formInscripcion" action="./php/formulario.php" runat="server" onsubmit='return validar(this);'>
@@ -73,8 +83,8 @@
 						<span id="required_notification">* Datos requeridos</span>
 					</li>
 					<li>
-						<label for="matricula">Matrícula</label> 
-						<input type="text" name="matricula" id="matricula" required placeholder="560-3148">
+						<label for="documento">Documento</label> 
+						<input type="text" name="documento" id="documento" required pattern="[0-9]{12}" title="Debe ingresar solo valores numéricos de hasta 12 caracteres" required placeholder="38545217">
 					</li>
 					<li>
 						<label for="nombre">Nombres</label> 
@@ -82,7 +92,7 @@
 					</li>
 					<li>
 						<label for="apellido">Apellido</label> 
-						<input type="text" name="apellido" id="nombre" required placeholder="Perez">
+						<input type="text" name="apellido" id="apellido" required placeholder="Perez">
 					</li>
 					<li>
 						<label for="email">Email</label> 
@@ -94,10 +104,14 @@
 					</li>
 					<li>
 						<label for="motivo">Motivo</label>
+						<input type="radio" name="motivo" value="1" onchange="habilitar(this.value);"> Participante<br>
+  						<input type="radio" name="motivo" value="2" onchange="habilitar(this.value);"> Ayudante<br>
+  						
+  						<!--<input type="radio" name="gender" value="other">
 						<select name="motivo" onchange="habilitar(this.value);">
 							<option value="1" selected="">Participante</option>
 							<option value="2">Ayudante</option>
-						</select>
+						</select>-->
 					</li>
 					<li>
 						<label for="disponibilidad">Disponibilidad</label>
@@ -109,7 +123,7 @@
 					</li>
 					<li>
 						<label for="equipos">Equipo</label>
-						<select name="equipos" id="equipos">
+						<select name="equipos" id="equipos" disabled>
 							<option value="">Seleccione su Equipo</option>
 							<option value="1">Anderlecht</option>
 							<option value="2">Apoel</option>
