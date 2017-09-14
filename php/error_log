@@ -1,0 +1,11 @@
+[13-Sep-2017 20:38:17 America/Chicago] PHP Warning:  The use statement with non-compound name 'PHPMailer' has no effect in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 2
+[13-Sep-2017 20:38:17 America/Chicago] PHP Warning:  The use statement with non-compound name 'Exception' has no effect in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 3
+[13-Sep-2017 20:38:17 America/Chicago] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 6
+[13-Sep-2017 20:38:17 America/Chicago] PHP Warning:  require(vendor/autoload.php): failed to open stream: No such file or directory in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 6
+[13-Sep-2017 20:38:17 America/Chicago] PHP Fatal error:  require(): Failed opening required 'vendor/autoload.php' (include_path='.:/opt/php56/lib/php') in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 6
+[13-Sep-2017 20:50:33 America/Chicago] PHP Warning:  include_once(class.smtp.php): failed to open stream: No such file or directory in /home4/apholos/public_html/ligaub.universys.site/php/phpmailer/class.phpmailer.php on line 515
+[13-Sep-2017 20:50:33 America/Chicago] PHP Warning:  include_once(): Failed opening 'class.smtp.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home4/apholos/public_html/ligaub.universys.site/php/phpmailer/class.phpmailer.php on line 515
+[13-Sep-2017 20:50:33 America/Chicago] PHP Fatal error:  Class 'SMTP' not found in /home4/apholos/public_html/ligaub.universys.site/php/phpmailer/class.phpmailer.php on line 583
+[13-Sep-2017 21:24:29 America/Chicago] PHP Warning:  Creating default object from empty value in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 32
+[13-Sep-2017 21:25:15 America/Chicago] PHP Warning:  Creating default object from empty value in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 32
+[13-Sep-2017 21:28:18 America/Chicago] PHP Warning:  Creating default object from empty value in /home4/apholos/public_html/ligaub.universys.site/php/mensajeGmail.php on line 32
