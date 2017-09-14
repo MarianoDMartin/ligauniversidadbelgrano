@@ -1,5 +1,7 @@
 <?php
-require("class.phpmailer.php");
+
+require 'phpmailer/PHPMailerAutoload.php';
+
 $mail = new PHPMailer();
 @$nombre = addslashes($_POST["nombre"]);
 @$apellido = addslashes($_POST["apellido"]);
@@ -18,25 +20,27 @@ if ($motivo=="1"){
 $mail->IsSMTP();
 $mail->SMTPAuth = true;
 $mail->SMTPSecure = 'tls';
+
 $mail->Host = "smtp.gmail.com"; // A RELLENAR. Aquí pondremos el SMTP a utilizar. Por ej. mail.midominio.com
 $mail->Username = "ub.comunidad.torneo@gmail.com"; // A RELLENAR. Email de la cuenta de correo. ej.info@midominio.com La cuenta de correo debe ser creada previamente. 
 $mail->Password = "torneo2017"; // A RELLENAR. Aqui pondremos la contraseña de la cuenta de correo
 $mail->Port = 587; // Puerto de conexión al servidor de envio. 
 $mail->From = "ub.comunidad.torneo@gmail.com"; // A RELLENARDesde donde enviamos (Para mostrar). Puede ser el mismo que el email creado previamente.
-$mail->FromName = "PWeb Torneo UB"; //A RELLENAR Nombre a mostrar del remitente. 
-$mail->AddAddress("mariano.d.martin@gmail.com"); // Esta es la dirección a donde enviamos 
+$mail->FromName = "Torneo Comunidad UB"; //A RELLENAR Nombre a mostrar del remitente. 
+$mail->AddAddress("ub.comunidad.torneo@gmail.com"); // Esta es la dirección a donde enviamos 
 $mail->IsHTML(true); // El correo se envía como HTML 
-$mail->Subject = "PRUEBA Mensaje de $smotivo de paginaweb"; // Este es el titulo del email. 
+$mail->Subject = "Mensaje desde la pagina LigaUB"; // Este es el titulo del email. 
 $body = "<h1>$smotivo de Pagina Web LigaUB</h1>"; 
-$body .= "Nombre: $nombre"; 
-$body .= "Apellido: $apellido"; 
-$body .= "Email: $email"; 
-$body .= "Motivo: $smotivo"; 
-$body .= "Mensaje: $mensaje";
-$exito = $mail->Body = $body; // Mensaje a enviar. $exito = $mail->Send(); // Envía el correo.
+$body .= "<h3>Nombre: </h3>$nombre </br>"; 
+$body .= "<h3>Apellido: </h3>$apellido</br>"; 
+$body .= "<h3>Email: </h3>$email</br>"; 
+$body .= "<h3>Motivo: </h3>$smotivo</br>"; 
+$body .= "<h3>Mensaje: </h3><strong>$mensaje</strong></br>";
+$mail->Body = $body; // Mensaje a enviar. 
+$exito = $mail->Send(); // Envía el correo.
 if($exito){ 
 	echo "<script language='javascript'>
-	alert('Mensaje enviado, le estaremos contestando a su correo. Muchas gracias!!..!');
+	alert('Mensaje enviado, le estaremos contestando a su correo. Muchas gracias!!!');
 	window.location.href = '../index.html';
 	</script>";
 }else{
