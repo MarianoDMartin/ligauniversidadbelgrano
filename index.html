@@ -2,23 +2,153 @@
 <html>
 <head>
 	<title>Liga Universidad de Belgrano</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css" href="./css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 </head>
 <body>
-	<div class="contenedor">
-		<header class="vertical-centered-text">
-			<div class="logo">
-				<img id="joystick" src="../img/joystick.png">
-				<h1>Liga Universidad de Belgrano</h1>
+	<section class="bienvenidos">
+		<header class="navbar fixed-top encabezado">
+			<div class="container">
+				<a href="index.html">
+					<img id="logo" src="img/liga.png">
+				</a>
+				<button type"button" class="boton-menu d-md-none" data-toggle="collapse" data-target="#menu-principal" aria-expanded="false" aria-controls="collapseExample">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</button>
+				<nav id="menu-principal" class="collapse">
+					<ul>
+						<li class="active"><a href="./index.html">Inicio</a></li>
+						<li><a href="./inscripcion.php">Inscripción</a></li>
+						<li><a href="./soporte.html">Soporte</a></li>
+						<li><a href="./academica.html">Información Académica</a></li>
+					</ul>
+				</nav>
 			</div>
 		</header>
-		<main>
-			<img id="construccion" src="./img/construccion.jpg">
-		</main>
-		<footer>
-			
-		</footer>
-	</div>
+		<div class="texto-encabezado text-center">
+			<div class="container">
+				<h1 class="display-4">Torneo de FIFA de la Universidad de Belgrano</h1>
+				<p>Sumate al primer torneo de FIFA organizado por la universidad de Belgrano, hay premios para los primeros tres puestos!!!</p>
+				<a href="inscripcion.php" class="btn btn-primary btn-lg">Inscribirse</a>
+			</div>
+		</div>
+		<div class="flecha-bajar text-center">
+			<a href="#informacion-gral"> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+		</div>
+	</section>
+	<main class="informacion-gral py-3" id="informacion-gral">
+        <div class="container">
+            <h2 class="text-center font-weight-bold" id="titulo-informacion">Información del Torneo</h2>
+            <div class="row" id="primer-fila">
+                <article class="col-md-3 wow bounceInLeft" data-wow-delay=".3s">
+                    <h3>Generalidades</h3>
+                    <p>
+                    <ul>
+                    	<li>Se utilizarán consolas PlayStation 4 y con el juego <strong>FIFA</strong></li>
+                    	<li><strong>Duración:</strong> Del 9/10/2017 hasta 27/10/2017</li>
+                    	<li><strong>Lugar:</strong> Piso 11 UB Zabala</li>
+                    	<li><strong>Horario:</strong>16:00 a 18:30 de Lunes a Viernes</li>
+                    	<li><strong>Inscripción:</strong> Del 18/09/2017 hasta el 08/09/2017 en esta página, <a href="inscripcion.php">seccion inscripción</a></li>
+                    	<li>Se pueden seleccionar únicamente clubes de la <strong>Champions League</strong>, el equipo escogido no podrá modificarse luego</li>
+                    	<li><strong>Se requiere que cada participante traiga su controlador (joystick)</strong></li>
+                    	<li>Todos los alumnos que quieran ayudar en la organización del evento se pueden inscribir como <strong>voluntarios</strong></li>
+                    </ul>
+					</p>
+                </article>
+
+                <article class="col-md-3 wow bounceInUp" data-wow-delay=".6s">
+                    <h3>Modalidad</h3>
+                    <p>
+                    	<ul>
+                    		<li>Los inscriptos serán agrupados en llaves de dos con un solo partido de <strong>eliminación directa</strong> de <strong>diez minutos</strong> de duración con sus respectivos descuentos</li>
+                    		<li>De persistir el empate, habrá <strong>gol de oro</strong>, y de mantenerse la paridad, se definirá por <strong>penales</strong></li>
+                    		<li>La <strong>FINAL</strong> será un solo partido de <strong>30 minutos</strong> de duración. En caso de empate, se realizará una prórroga normal, y si finalmente persistiera el empate, habrá ronda de penales.</li>
+                    	</ul>
+                    </p>
+                </article>
+
+                <article class="col-md-3 wow bounceInRight" data-wow-delay="1s">
+                    <h3>Antes de los partidos</h3>
+                    <p>
+                    	<ul>
+                    		<li>Cada jugador <strong>selecciona el equipo</strong> correspondiente al de su inscripción</li>
+                    		<li>Se permiten <strong>3 minutos</strong> para configuraciones en general, antes del segundo tiempo será de <strong>1 minuto</strong></li>
+                    	</ul>
+                    </p>
+                </article>
+
+                <article class="col-md-3 wow bounceInRight" data-wow-delay="1s">
+                    <h3>Configuración de los partidos</h3>
+                    <p>
+                    	<ul>
+                    		<li>La climatología, la hora, el balón, el estadio y la condición de los jugadores, así como otros <strong>factores, serán al azar</strong> para dar más realismo a los encuentros</li>
+							<li>Cada jugador podrá variar la <strong>configuración personal</strong> y los botones</li>
+							<li><strong>No se permite utilizar memorias</strong> para cargar equipos modificados, configuraciones</li>
+							<li>La <strong>cámara</strong> será “Predefinida larga”</li>
+                    	</ul>
+                    </p>
+                </article>
+            </div>
+
+
+
+            <div class="row">
+                <article class="col-md-4 wow bounceInLeft" data-wow-delay=".3s">
+                    <h3>Durante los partidos</h3>
+                    <p>
+                    <ul>
+                    	<li>Se permiten tres cambios por partido y jugador</li>
+						<li>Las pausas se pueden realizar solo con el balón parado,con un límite de cinco pausas por jugador en cada partido</li>
+						<li>Antes de realizar una pausa, el jugador deberá avisar a su contrincante</li>
+						<li>En caso de registrarse una pausa con el balón en juego, o durante el lanzamiento de faltas o tiros de esquina, se debe entregar la pelota al rival y seguir con el juego</li>
+						<li>En caso de que por motivo de una <strong>pausa injustificada</strong> o de algún acto fuera de lugar se marcara un gol, el personal organizador que vigile en el momento el partido deberá evaluar la situación y eventualmente anular el gol</li>
+                    </ul>
+					</p>
+                </article>
+
+                <article class="col-md-4 wow bounceInUp" data-wow-delay=".6s">
+                    <h3>Irregularidades</h3>
+                    <p>
+                    	<ul>
+                    		<li>En caso de un desperfecto técnico que provoque una <strong>interrupción irreversible</strong> del juego, si ocurre el el primer tiempo, se comenzará nuevamente el partido. En cambio, si ocurre en el segundo tiempo solo se jugará un tiempo. En ambos casos se mantendrán los goles anotados</li>
+                    		<li>Los árbitros son las personas que vigilan el correcto proceder del juego, y quienes se reservan el derecho de suspender, terminar o dar por ganador a un jugador frente a una <strong>situación irregular o un comportamiento inadecuado</strong> de los jugadores.</li>
+                    		<li>En caso de que el encargado proceda de manera injusta o poco ética, según el criterio de uno o más participantes, se puede realizar un <strong>queja</strong> en la <a href="consultas.html">sección Soporte</a> de ésta página</li>
+                    	</ul>
+                    </p>
+                </article>
+
+                <article class="col-md-4 wow bounceInRight" data-wow-delay="1s">
+                    <h3>Otros Datos Importantes</h3>
+                    <p>
+                    	<ul>
+                    		<li>En el caso de que en una ronda los jugadores sean impares, se deberá seleccionar un jugador que <strong>pase directo</strong> a la siguiente ronda</li>
+							<li>Si la ronda en cuestión es la primera, el mismo se seleccionará al <strong>azar</strong>, en cambio, si ya se jugó una ronda anterior, el jugador que pasa directo es el que generó una mayor <strong>diferencia de goles</strong> en su último partido</li>
+							<li>Si hay más de un jugador que cumple la misma condición, se aplicará de nuevo el <strong>azar</strong> entre los mismos</li>
+							<li>En caso de que algún <strong>participante no se presente</strong>, se dará por ganador a su contrincante</li>
+                    	</ul>
+                    </p>
+                </article>
+            </div>
+        </div>
+    </main>
+    <footer class="piedepagina py-3" role="contentinfo">
+        <div class="container">
+        	<div class="row">
+	            <p class="col-md-10">2017 - Universys Facultad de Tecnología UB </br>Todos los derechos reservados</p>
+	            <div class="col-md-2">
+	            	<a href="usuario.html"><button type="button" class="btn btn-link">Administrador</button></a>
+	            </div>
+            </div>
+        </div>
+    </footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
