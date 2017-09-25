@@ -51,40 +51,18 @@ if ($_SESSION['usuario']=="")
 					</tbody>
 				</table>
 			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<label class="label_cantidad_inscriptos">Participantes Inscriptos: </label>
-						<?php
-							$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
-							// Check connection
-							$con->set_charset("utf8");
-							if (mysqli_connect_errno())
-							{
-							echo "Failed to connect to MySQL: " . mysqli_connect_error();
-							}
-
-							$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
-							$rows=mysqli_affected_rows($con);
-							echo "<label class=\"cantidad_inscriptos\">". $rows ."<label>";
-	
-							mysqli_close($con);
-						?>
+			<div>
+				<form name="bajaParticipante" class="bajaParticipante" action="./php/bajaParticipante.php" runat="server" method="POST">
+					<div class="form-group row">
+						<label for="baja" class="col-md-3 col-form-label">Ingrese el ID del Participante</label>
+						<div class="col-md-3">	
+							<input class="form-control" type="text" name="baja_part" id="baja_part">
+						</div>
+						<div class="col-md-3">	
+							<button type="submit" class="btn btn-primary">Dar de Baja</button>
+						</div>
 					</div>
-					<div class="col-md-6">
-						<form name="bajaParticipante" class="bajaParticipante" action="./php/bajaParticipante.php" runat="server" method="POST">
-							<div class="form-group row">
-								<label for="baja" class="col-md-3 col-form-label">Ingrese el ID del Participante</label>
-								<div class="col-md-3">	
-									<input class="form-control" type="text" name="baja_part" id="baja_part">
-								</div>
-								<div class="col-md-3">	
-									<button type="submit" class="btn btn-primary btn-baja">Dar de Baja</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
+				</form>
 			</div>
 	      </div>
 	    </div>
@@ -108,91 +86,50 @@ if ($_SESSION['usuario']=="")
 					</tbody>
 				</table>
 			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<label class="label_cantidad_inscriptos">Ayudantes Inscriptos: </label>
-						<?php
-							$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
-							// Check connection
-							$con->set_charset("utf8");
-							if (mysqli_connect_errno())
-							{
-							echo "Failed to connect to MySQL: " . mysqli_connect_error();
-							}
-
-							$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
-							$rows=mysqli_affected_rows($con);
-							echo "<label class=\"cantidad_inscriptos\">". $rows ."<label>";
-	
-							mysqli_close($con);
-						?>
+			<div>
+				<form name="bajaAyudante" class="bajaAyudante" action="./php/bajaAyudante.php" runat="server" method="POST">
+					<div class="form-group row">
+						<label for="baja" class="col-md-3 col-form-label">Ingrese el ID del Ayudante</label>
+						<div class="col-md-3">	
+							<input class="form-control" type="text" name="baja_part" id="baja_part">
+						</div>
+						<div class="col-md-3">	
+							<button type="submit" class="btn btn-primary">Dar de Baja</button>
+						</div>
 					</div>
-					<div class="col-md-6">
-						<form name="bajaAyudante" class="bajaAyudante" action="./php/bajaAyudante.php" runat="server" method="POST">
-							<div class="form-group row">
-								<label for="baja" class="col-md-3 col-form-label">Ingrese el ID del Ayudante</label>
-								<div class="col-md-3">	
-									<input class="form-control" type="text" name="baja_part" id="baja_part">
-								</div>
-								<div class="col-md-3">	
-									<button type="submit" class="btn btn-primary btn-baja">Dar de Baja</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
+				</form>
 			</div>
 	      </div>
 	    </div>
 	    <div class="container">
-	    	<div class="row">
-	    		<div class="col-md-6">
-			    	<h3>Equipos disponibles</h3>
-			    	<table class="table table-condensed table-hover table-striped" width="60%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Nombre</th>
-							</tr>
-						</thead>
-						<tbody id="tabla_participantes">
-							<?php
-								$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
-								// Check connection
-								$con->set_charset("utf8");
-								if (mysqli_connect_errno())
-								{
-								echo "Failed to connect to MySQL: " . mysqli_connect_error();
-								}
+	    	<h3>Equipos disponibles</h3>
+	    	<table class="table table-condensed table-hover table-striped" width="60%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+					</tr>
+				</thead>
+				<tbody id="tabla_participantes">
+					<?php
+						$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
+						// Check connection
+						$con->set_charset("utf8");
+						if (mysqli_connect_errno())
+						{
+						echo "Failed to connect to MySQL: " . mysqli_connect_error();
+						}
 
-								$result = mysqli_query($con,"SELECT * FROM Equipos ORDER BY 2");
+						$result = mysqli_query($con,"SELECT * FROM Equipos ORDER BY 2");
 
-								while($row = mysqli_fetch_array($result))
-								{
-									echo "<tr><td>" . $row['id_equipo'] . "</td><td>" . $row['equipo_desc'] . "</td></tr>";
-								}
-								mysqli_close($con);
-							?>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-md-6">
-			    	<h3>Horarios disponibles</h3>
-			    	<table class="table table-condensed table-hover table-striped" width="60%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>Valores</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
-							</tr>
-						</thead>
-						<tbody id="tabla_participantes">
-							<tr>
-								<td>------</td><td>16:00 a 16:30hs</td><td>16:30 a 17:00hs</td><td>17:00 a 17:30hs</td><td>17:30 a 18:00hs</td><td>18:00 a 18:30hs</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>	
+						while($row = mysqli_fetch_array($result))
+						{
+							echo "<tr><td>" . $row['id_equipo'] . "</td><td>" . $row['equipo_desc'] . "</td></tr>";
+						}
+						mysqli_close($con);
+					?>
+				</tbody>
+			</table>	
 	    </div>
 	</main>
 	<footer class="pieAdministracion"" role="contentinfo">

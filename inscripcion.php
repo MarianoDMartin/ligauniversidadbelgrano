@@ -114,7 +114,7 @@
 						<div class="form-group row">
 							<label for="documento" class="col-md-4 col-form-label">Documento</label> 
 							<div class="col-md-8">
-								<input class="form-control" type="text" name="documento" id="documento" required pattern="[0-9]{1,12}" title="Debe ingresar solo valores numéricos de hasta 12 caracteres" required placeholder="38545217">
+								<input class="form-control" type="text" name="documento" id="documento" required pattern="[0-9]{1,12}" title="Debe ingresar solo valores numéricos de hasta 12 caracteres" required placeholder="documento sin puntos, solo numeros">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -143,8 +143,27 @@
 						</div>
 						<div class="form-group row">
 							<label for="motivo" class="col-md-4 col-form-label">Motivo</label>
-								<div class="col-md-8">		
-									<input type="radio" name="motivo" value="1" onchange="habilitar(this.value);"> Participante<br>
+								<div class="col-md-8">
+									<?php
+										$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
+										// Check connection
+										$con->set_charset("utf8");
+										if (mysqli_connect_errno())
+										{
+										echo "Failed to connect to MySQL: " . mysqli_connect_error();
+										}
+
+										$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
+										$rows=mysqli_affected_rows($con);
+										if ($rows>=256){
+											echo "<input type=\"radio\" name=\"motivo\" value=\"1\" onchange=\"habilitar(this.value);\" disabled> Participante <strong>Cupos LLenos</strong><br>";
+										}
+										else{
+											echo "<input type=\"radio\" name=\"motivo\" value=\"1\" onchange=\"habilitar(this.value);\"> Participante<br>";
+										}
+				
+										mysqli_close($con);
+									?>
 			  						<input type="radio" name="motivo" value="2" onchange="habilitar(this.value);"> Ayudante<br>
 			  					</div>
 						</div>

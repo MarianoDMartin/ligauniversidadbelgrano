@@ -225,4 +225,19 @@
   background: #111;
   color: #fff; }
 
+.cantidad_inscriptos {
+  padding-left: 1rem;
+  color: blue;
+  font-size: 2.5rem; }
+
+.label_cantidad_inscriptos {
+  font-size: 2rem; }
+
+.btn-baja {
+  color: #fff;
+  background-color: red;
+  border-color: transparent;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease; }
+
 /*# sourceMappingURL=estilos.css.map */
