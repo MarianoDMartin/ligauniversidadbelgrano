@@ -48,6 +48,32 @@ if ($_SESSION['usuario']=="")
 						</tr>
 					</thead>
 					<tbody id="tabla_participantes">
+						<?php
+							$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
+							// Check connection
+							$con->set_charset("utf8");
+							if (mysqli_connect_errno())
+							{
+							echo "Failed to connect to MySQL: " . mysqli_connect_error();
+							}
+
+							$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
+
+							while($row = mysqli_fetch_array($result))
+							{
+								echo "<tr>";
+								echo "<td>" . $row['id_inscripto'] . "</td>";
+								echo "<td>" . $row['documento'] . "</td>";
+								echo "<td>" . $row['nombre'] . "</td>";
+								echo "<td>" . $row['apellido'] . "</td>";
+								echo "<td>" . $row['email'] . "</td>";
+								echo "<td>" . $row['telefono'] . "</td>";
+								echo "<td>" . $row['disponibilidad'] . "</td>";
+								echo "<td>" . $row['id_equipo'] . "</td>";
+								echo "</tr>";
+							}
+							mysqli_close($con);
+						?>
 					</tbody>
 				</table>
 			</div>
@@ -202,116 +228,42 @@ if ($_SESSION['usuario']=="")
     </footer>
 </body>
 </html>
-<script type="text/javascript">
+<script type="text/javascript">/*
 $( document ).ready(function() {
 	function get_participante() {
-		$.ajax({
-		  type: "GET",  
-		  url: "/php/tab_response_participante.php",
-		  dataType: "json",       
-		  success: function(response)  
-		  {
-			for (var i = 0; i < response.length; i++) {
-				 $('#tabla_participantes').append(
-				 		"<tr><td>" + response[i].id_inscripto + 
-				 		"</td><td data-name='documento' class='documento' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].documento + 
-				 		"</td><td data-name='nombre' class='nombre' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].nombre + 
-				 		"</td><td data-name='apellido' class='apellido' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].apellido + 
-				 		"</td><td data-name='email' class='email' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].email + 
-				 		"</td><td data-name='telefono' class='telefono' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].telefono + 
-				 		"</td><td data-name='disponibilidad' class='disponibilidad' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].disponibilidad + 
-				 		"</td><td data-name='id_equipo' class='id_equipo' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].id_equipo + "</td></tr>");
-			 }
-		  },
-		 error: function(jqXHR, textStatus, errorThrown) {
-			 alert("loading error data " + errorThrown);
-		 }
-		});
-	}
-
-	
-	function make_editable_col(table_selector,column_selector,ajax_url,title) {
-		$(table_selector).editable({   
-			selector: column_selector,
-			url: ajax_url,
-			title: title,
-			type: "POST",
-			dataType: 'json'
-		  });
-		  $.fn.editable.defaults.mode = 'inline';
-		}
-	
-	get_participante();
-	
-	make_editable_col('#tabla_participantes','td.documento','/php/tab_response_participante.php?action=edit','documento');
-	make_editable_col('#tabla_participantes','td.nombre','/php/tab_response_participante.php?action=edit','nombre');
-	make_editable_col('#tabla_participantes','td.apellido','/php/tab_response_participante.php?action=edit','apellido');
-	make_editable_col('#tabla_participantes','td.email','/php/tab_response_participante.php?action=edit','email');
-	make_editable_col('#tabla_participantes','td.telefono','/php/tab_response_participante.php?action=edit','telefono');
-	make_editable_col('#tabla_participantes','td.disponibilidad','/php/tab_response_participante.php?action=edit','disponibilidad');
-	make_editable_col('#tabla_participantes','td.id_equipo','/php/tab_response_participante.php?action=edit','id_equipo');
-	
-	function ajaxAction_part(action) {
-		data = $("#frm_"+action).serializeArray();
-		$.ajax({
-		  type: "POST",  
-		  url: "/php/tab_response_participante.php",  
-		  data: data,
-		  dataType: "json",       
-		  success: function(response)  
-		  {
-			$('#'+action+'_model').modal('hide');
-			$("#tabla_participantes").bootgrid('reload');
-		  }   
-		});
-	}
-
-	function get_ayudante() {
-		$.ajax({
-		  type: "GET",  
-		  url: "/php/tab_response_ayudante.php",
-		  dataType: "json",       
-		  success: function(response)  
-		  {
-			for (var i = 0; i < response.length; i++) {
-				 $('#tabla_ayudantes').append(
-				 		"<tr><td>" + response[i].id_inscripto + 
-				 		"</td><td data-name='documento' class='documento' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].documento + 
-				 		"</td><td data-name='nombre' class='nombre' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].nombre + 
-				 		"</td><td data-name='apellido' class='apellido' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].apellido + 
-				 		"</td><td data-name='email' class='email' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].email + 
-				 		"</td><td data-name='telefono' class='telefono' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].telefono + 
-				 		"</td><td data-name='disponibilidad' class='disponibilidad' data-type='text' data-pk='"+response[i].id_inscripto+"'>" + response[i].disponibilidad + "</td></tr>");
-			 }
-		  },
-		 error: function(jqXHR, textStatus, errorThrown) {
-			 alert("loading error data " + errorThrown);
-		 }
-		});
-	}
-
-	get_ayudante();
-	
-	make_editable_col('#tabla_ayudantes','td.documento','/php/tab_response_ayudante.php?action=edit','documento');
-	make_editable_col('#tabla_ayudantes','td.nombre','/php/tab_response_ayudante.php?action=edit','nombre');
-	make_editable_col('#tabla_ayudantes','td.apellido','/php/tab_response_ayudante.php?action=edit','apellido');
-	make_editable_col('#tabla_ayudantes','td.email','/php/tab_response_ayudante.php?action=edit','email');
-	make_editable_col('#tabla_ayudantes','td.telefono','/php/tab_response_ayudante.php?action=edit','telefono');
-	make_editable_col('#tabla_ayudantes','td.disponibilidad','/php/tab_response_ayudante.php?action=edit','disponibilidad');
-	
-	function ajaxAction_ayud(action) {
-		data = $("#frm_"+action).serializeArray();
-		$.ajax({
-		  type: "POST",  
-		  url: "/php/tab_response_ayudante.php",  
-		  data: data,
-		  dataType: "json",       
-		  success: function(response)  
-		  {
-			$('#'+action+'_model').modal('hide');
-			$("#tabla_ayudantes").bootgrid('reload');
-		  }   
-		});
-	}
-});
+	*/
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
