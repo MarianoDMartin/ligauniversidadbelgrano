@@ -1,20 +1,17 @@
 <?php
 session_start();
 if ($_SESSION['usuario']=="")
-    header("Location: index.html");
+    header("Location: ../index.html");
 ?>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Administracion</title>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/estilos.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Administracion</title>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top navAdministracion">
@@ -50,8 +47,6 @@ if ($_SESSION['usuario']=="")
 					<tbody id="tabla_participantes">
 						<?php
 							$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
-							// Check connection
-							$con->set_charset("utf8");
 							if (mysqli_connect_errno())
 							{
 							echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -60,20 +55,26 @@ if ($_SESSION['usuario']=="")
 							$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
 
 							while($row = mysqli_fetch_array($result))
-							{
+							{	
+								echo "<form name="participante" class="" action="../php/updateParticipante.php" runat="server" onsubmit='' method="POST">";
 								echo "<tr>";
-								echo "<td>" . $row['id_inscripto'] . "</td>";
-								echo "<td>" . $row['documento'] . "</td>";
-								echo "<td>" . $row['nombre'] . "</td>";
-								echo "<td>" . $row['apellido'] . "</td>";
-								echo "<td>" . $row['email'] . "</td>";
-								echo "<td>" . $row['telefono'] . "</td>";
-								echo "<td>" . $row['disponibilidad'] . "</td>";
-								echo "<td>" . $row['id_equipo'] . "</td>";
+								echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="id_inscripto' . row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '</td>';
+								echo '<td> <input disabled type="text" size="12" name="documento" id="documento' . row['id_inscripto'] . '" value="'      . $row['documento']      . '</td>';
+								echo '<td> <input disabled type="text" size="15" name="nombre" id="nombre' . row['id_inscripto'] . '" value="'         . $row['nombre']         . '</td>';
+								echo '<td> <input disabled type="text" size="15" name="apellido" id="apellido' . row['id_inscripto'] . '" value="'       . $row['apellido']       . '</td>';
+								echo '<td> <input disabled type="text" size="35" name="email" id="email' . row['id_inscripto'] . '" value="'          . $row['email']          . '</td>';
+								echo '<td> <input disabled type="text" size="15" name="telefono" id="telefono' . row['id_inscripto'] . '" value="'       . $row['telefono']       . '</td>';
+								echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="disponibilidad' . row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '</td>';
+								echo '<td> <input disabled type="text" size="2"  name="id_equipo" id="id_equipo' . row['id_inscripto'] . '" value="'      . $row['id_equipo']      . '</td>';
+								echo '<td> <button type"button" name="editar" value="' . $row['id_inscripto'] . '">';
+								echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
+								echo "</button>";
 								echo "</tr>";
+								echo "</form>";
 							}
 							mysqli_close($con);
 						?>
+						
 					</tbody>
 				</table>
 			</div>
@@ -92,7 +93,7 @@ if ($_SESSION['usuario']=="")
 
 							$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
 							$rows=mysqli_affected_rows($con);
-							echo "<label class=\"cantidad_inscriptos\">". $rows ."<label>";
+							echo '<label class="cantidad_inscriptos">'. $rows .'<label>';
 	
 							mysqli_close($con);
 						?>
@@ -149,7 +150,7 @@ if ($_SESSION['usuario']=="")
 
 							$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
 							$rows=mysqli_affected_rows($con);
-							echo "<label class=\"cantidad_inscriptos\">". $rows ."<label>";
+							echo '<label class="cantidad_inscriptos">'. $rows .'<label>';
 	
 							mysqli_close($con);
 						?>
@@ -226,13 +227,17 @@ if ($_SESSION['usuario']=="")
             <p>2017 - Universys Facultad de Tecnología UB </br>Todos los derechos reservados</p>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
-</html>
-<script type="text/javascript">/*
-$( document ).ready(function() {
-	function get_participante() {
-	*/
+<script type="text/javascript">
+	document.getElementById("editar").onclick=function(){
+		validarCampos();
+	}
 </script>
+</html>
+
 
 
 
