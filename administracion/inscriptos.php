@@ -18,7 +18,7 @@ if ($_SESSION['usuario']=="")
 	  <div class="container">
 	  	<div class="row">
 	    	<div class="col-md-10 tituloAdministracion">
-	    		Administración del Sistema - Uiversys - LigaUB
+	    		Administración del Sistema - Universys - LigaUB
 	    	</div>
 	    	<div class="col-md-2">
 	    		<a href='php/logout.php'>Cerrar Sesión</a>
@@ -42,6 +42,7 @@ if ($_SESSION['usuario']=="")
 							<th>Telefono</th>
 							<th>Disponibilidad</th>
 							<th>Equipo</th>
+							<th colspan="3"></th>
 						</tr>
 					</thead>
 					<tbody id="tabla_participantes">
@@ -56,20 +57,25 @@ if ($_SESSION['usuario']=="")
 
 							while($row = mysqli_fetch_array($result))
 							{	
-								echo '<form name="participante" class="" action="." runat="server" method="POST">';
+								echo '<form name="participante" class="" action="php/updateParticipante.php" runat="server" method="POST">';
 								echo "<tr>";
-								echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="id_inscripto' . $row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '"</td>';
-								echo '<td> <input disabled type="text" size="12" name="documento" id="documento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"</td>';
-								echo '<td> <input disabled type="text" size="15" name="nombre" id="nombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"</td>';
-								echo '<td> <input disabled type="text" size="15" name="apellido" id="apellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"</td>';
-								echo '<td> <input disabled type="text" size="35" name="email" id="email' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"</td>';
-								echo '<td> <input disabled type="text" size="15" name="telefono" id="telefono' . $row['id_inscripto'] . '" value="'       . $row['telefono']       . '"</td>';
-								echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="disponibilidad' . $row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '"</td>';
-								echo '<td> <input disabled type="text" size="2"  name="id_equipo" id="id_equipo' . $row['id_inscripto'] . '" value="'      . $row['id_equipo']      . '"</td>';
-								echo '<td> <button name="editar" value="' . $row['id_inscripto'] . '">';
+								echo '<td> <input disabled  readonly="readonly" type="text" size="3" name="idParticipante" id="pid' . $row['id_inscripto'] . '" value="'      . $row['id_inscripto']      . '"></td>';
+								echo '<td> <input disabled type="text" size="12" name="documento" id="pdocumento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"></td>';
+								echo '<td> <input disabled type="text" size="15" name="nombre" id="pnombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
+								echo '<td> <input disabled type="text" size="15" name="apellido" id="papellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
+								echo '<td> <input disabled type="text" size="35" name="email" id="pemail' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"></td>';
+								echo '<td> <input disabled type="text" size="15" name="telefono" id="ptelefono' . $row['id_inscripto'] . '" value="'       . $row['telefono']       . '"></td>';
+								echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="pdisponibilidad' . $row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '"></td>';
+								echo '<td> <input disabled type="text" size="2"  name="id_equipo" id="pid_equipo' . $row['id_inscripto'] . '" value="'      . $row['id_equipo']      . '"></td>';
+								echo '<td> <button type="button" name="peditar" value="' . $row['id_inscripto'] . '" id="peditar' . $row['id_inscripto'] . '">';
 								echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
 								echo "</button></td>";
-								echo '<td> <button name="update" type="send">Enviar</button></td>';
+								echo '<td> <button name="penviar" type="submit" id="penviar' . $row['id_inscripto'] . '" hidden>';
+								echo '<i class="fa fa-check" aria-hidden="true"></i>';
+								echo "</button></td>";
+								echo '<td> <button name="pcancelar" type="button" id="pcancelar' . $row['id_inscripto'] . '" hidden>';
+								echo '<i class="fa fa-times" aria-hidden="true"></i>';
+								echo "</button></td>";
 								echo "</tr>";
 								echo "</form>";
 							}
@@ -130,9 +136,44 @@ if ($_SESSION['usuario']=="")
 							<th>Email</th>
 							<th>Telefono</th>
 							<th>Disponibilidad</th>
+							<th colspan="3"></th>
 						</tr>
 					</thead>
 					<tbody id="tabla_ayudantes">
+						<?php
+							$con = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
+							if (mysqli_connect_errno())
+							{
+							echo "Failed to connect to MySQL: " . mysqli_connect_error();
+							}
+
+							$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
+
+							while($row = mysqli_fetch_array($result))
+							{	
+								echo '<form name="participante" class="" action="." runat="server" method="POST">';
+								echo "<tr>";
+								echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="aid' . $row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '"></td>';
+								echo '<td> <input disabled type="text" size="12" name="documento" id="adocumento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"></td>';
+								echo '<td> <input disabled type="text" size="15" name="nombre" id="anombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
+								echo '<td> <input disabled type="text" size="15" name="apellido" id="aapellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
+								echo '<td> <input disabled type="text" size="35" name="email" id="aemail' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"></td>';
+								echo '<td> <input disabled type="text" size="15" name="telefono" id="atelefono' . $row['id_inscripto'] . '" value="'       . $row['telefono']       . '"></td>';
+								echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="adisponibilidad' . $row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '"></td>';
+								echo '<td> <button type="button" name="aeditar" value="' . $row['id_inscripto'] . '" id="aeditar' . $row['id_inscripto'] . '">';
+								echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
+								echo "</button></td>";
+								echo '<td> <button name="aenviar" type="submit" id="aenviar' . $row['id_inscripto'] . '" hidden>';
+								echo '<i class="fa fa-check" aria-hidden="true"></i>';
+								echo "</button></td>";
+								echo '<td> <button name="acancelar" type="button" id="acancelar' . $row['id_inscripto'] . '" hidden>';
+								echo '<i class="fa fa-times" aria-hidden="true"></i>';
+								echo "</button></td>";
+								echo "</tr>";
+								echo "</form>";
+							}
+							mysqli_close($con);
+						?>
 					</tbody>
 				</table>
 			</div>
@@ -223,7 +264,7 @@ if ($_SESSION['usuario']=="")
 			</div>	
 	    </div>
 	</main>
-	<footer class="pieAdministracion"" role="contentinfo">
+	<footer class="pieAdministracion" role="contentinfo">
         <div class="container">
             <p>2017 - Universys Facultad de Tecnología UB </br>Todos los derechos reservados</p>
         </div>
@@ -235,23 +276,115 @@ if ($_SESSION['usuario']=="")
 <script type="text/javascript">
 	
 	function listener_edits() {
-		var botonesEditar=document.getElementsByName("editar");
-		for (var a=0; a<botonesEditar.length; a++){
-			botonesEditar[a].onclick = function(){
-				debugger;
-				alert(this.value);
-				habilitar_campos(botonesEditar[a].value);
+		var botonesEditarp=document.getElementsByName("peditar");
+		for (var a=0; a<botonesEditarp.length; a++){
+			botonesEditarp[a].onclick = function(){
+				deshabilitar_campos_todos_p();
+				deshabilitar_campos_todos_a();
+				habilitar_campos_p(this.value);
+			}
+		}
+		var botonesEditara=document.getElementsByName("aeditar");
+		for (var a=0; a<botonesEditara.length; a++){
+			botonesEditara[a].onclick = function(){
+				deshabilitar_campos_todos_p();
+				deshabilitar_campos_todos_a();
+				habilitar_campos_a(this.value);
 			}
 		}
 	}
 
-	function habilitar_campos(id){
-		alert(id);
+	function listener_cancelar() {
+		var botonesCancelarp=document.getElementsByName("pcancelar");
+		for (var a=0; a<botonesCancelarp.length; a++){
+			botonesCancelarp[a].onclick = function(){
+				deshabilitar_campos_todos_p();
+			}
+		}
+		var botonesCancelara=document.getElementsByName("acancelar");
+		for (var a=0; a<botonesCancelara.length; a++){
+			botonesCancelara[a].onclick = function(){
+				deshabilitar_campos_todos_a();
+			}
+		}
 	}
 
-	window.onload= function(){ 
-		listener_edits();
+	function habilitar_campos_p(id){
+		document.getElementById("peditar"+id).hidden=true;
+		document.getElementById("penviar"+id).hidden=false;
+		document.getElementById("pcancelar"+id).hidden=false;
+		document.getElementById("pid"+id).disabled=false;
+		document.getElementById("pid"+id).readonly="readonly";
+		document.getElementById("pdocumento"+id).disabled=false;
+		document.getElementById("pnombre"+id).disabled=false;
+		document.getElementById("papellido"+id).disabled=false;
+		document.getElementById("pemail"+id).disabled=false;
+		document.getElementById("ptelefono"+id).disabled=false;
+		document.getElementById("pdisponibilidad"+id).disabled=false;
+		document.getElementById("pid_equipo"+id).disabled=false;
 	}
+
+	function habilitar_campos_a(id){
+		document.getElementById("aeditar"+id).hidden=true;
+		document.getElementById("aenviar"+id).hidden=false;
+		document.getElementById("acancelar"+id).hidden=false;
+		document.getElementById("aid"+id).disabled=false;
+		document.getElementById("adocumento"+id).disabled=false;
+		document.getElementById("anombre"+id).disabled=false;
+		document.getElementById("aapellido"+id).disabled=false;
+		document.getElementById("aemail"+id).disabled=false;
+		document.getElementById("atelefono"+id).disabled=false;
+		document.getElementById("adisponibilidad"+id).disabled=false;
+	}
+
+	function deshabilitar_campos_todos_p(){
+		var botonesEditar=document.getElementsByName("peditar");
+		for (var a=0; a<botonesEditar.length; a++){
+			deshabilitar_campos_p(botonesEditar[a].value);
+		}
+	}
+
+	function deshabilitar_campos_todos_a(){
+		var botonesEditar=document.getElementsByName("aeditar");
+		for (var a=0; a<botonesEditar.length; a++){
+			deshabilitar_campos_a(botonesEditar[a].value);
+		}
+	}
+
+	function deshabilitar_campos_p(id){
+		document.getElementById("peditar"+id).hidden=false;
+		document.getElementById("penviar"+id).hidden=true;
+		document.getElementById("pcancelar"+id).hidden=true;
+		document.getElementById("pid"+id).disabled=true;
+		document.getElementById("pdocumento"+id).disabled=true;
+		document.getElementById("pnombre"+id).disabled=true;
+		document.getElementById("papellido"+id).disabled=true;
+		document.getElementById("pemail"+id).disabled=true;
+		document.getElementById("ptelefono"+id).disabled=true;
+		document.getElementById("pdisponibilidad"+id).disabled=true;
+		document.getElementById("pid_equipo"+id).disabled=true;
+	}
+
+	function deshabilitar_campos_a(id){
+		document.getElementById("aeditar"+id).hidden=false;
+		document.getElementById("aenviar"+id).hidden=true;
+		document.getElementById("acancelar"+id).hidden=true;
+		document.getElementById("aid"+id).disabled=true;
+		document.getElementById("adocumento"+id).disabled=true;
+		document.getElementById("anombre"+id).disabled=true;
+		document.getElementById("aapellido"+id).disabled=true;
+		document.getElementById("aemail"+id).disabled=true;
+		document.getElementById("atelefono"+id).disabled=true;
+		document.getElementById("adisponibilidad"+id).disabled=true;
+	}
+
+
+	window.onload= function(){
+		debugger; 
+		listener_edits();
+		listener_cancelar();
+	}
+
 </script>
 </html>
 
