@@ -56,19 +56,20 @@ if ($_SESSION['usuario']=="")
 
 							while($row = mysqli_fetch_array($result))
 							{	
-								echo "<form name="participante" class="" action="../php/updateParticipante.php" runat="server" onsubmit='' method="POST">";
+								echo '<form name="participante" class="" action="." runat="server" method="POST">';
 								echo "<tr>";
-								echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="id_inscripto' . row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '</td>';
-								echo '<td> <input disabled type="text" size="12" name="documento" id="documento' . row['id_inscripto'] . '" value="'      . $row['documento']      . '</td>';
-								echo '<td> <input disabled type="text" size="15" name="nombre" id="nombre' . row['id_inscripto'] . '" value="'         . $row['nombre']         . '</td>';
-								echo '<td> <input disabled type="text" size="15" name="apellido" id="apellido' . row['id_inscripto'] . '" value="'       . $row['apellido']       . '</td>';
-								echo '<td> <input disabled type="text" size="35" name="email" id="email' . row['id_inscripto'] . '" value="'          . $row['email']          . '</td>';
-								echo '<td> <input disabled type="text" size="15" name="telefono" id="telefono' . row['id_inscripto'] . '" value="'       . $row['telefono']       . '</td>';
-								echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="disponibilidad' . row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '</td>';
-								echo '<td> <input disabled type="text" size="2"  name="id_equipo" id="id_equipo' . row['id_inscripto'] . '" value="'      . $row['id_equipo']      . '</td>';
-								echo '<td> <button type"button" name="editar" value="' . $row['id_inscripto'] . '">';
+								echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="id_inscripto' . $row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '"</td>';
+								echo '<td> <input disabled type="text" size="12" name="documento" id="documento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"</td>';
+								echo '<td> <input disabled type="text" size="15" name="nombre" id="nombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"</td>';
+								echo '<td> <input disabled type="text" size="15" name="apellido" id="apellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"</td>';
+								echo '<td> <input disabled type="text" size="35" name="email" id="email' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"</td>';
+								echo '<td> <input disabled type="text" size="15" name="telefono" id="telefono' . $row['id_inscripto'] . '" value="'       . $row['telefono']       . '"</td>';
+								echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="disponibilidad' . $row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '"</td>';
+								echo '<td> <input disabled type="text" size="2"  name="id_equipo" id="id_equipo' . $row['id_inscripto'] . '" value="'      . $row['id_equipo']      . '"</td>';
+								echo '<td> <button name="editar" value="' . $row['id_inscripto'] . '">';
 								echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
-								echo "</button>";
+								echo "</button></td>";
+								echo '<td> <button name="update" type="send">Enviar</button></td>';
 								echo "</tr>";
 								echo "</form>";
 							}
@@ -228,12 +229,28 @@ if ($_SESSION['usuario']=="")
         </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 <script type="text/javascript">
-	document.getElementById("editar").onclick=function(){
-		validarCampos();
+	
+	function listener_edits() {
+		var botonesEditar=document.getElementsByName("editar");
+		for (var a=0; a<botonesEditar.length; a++){
+			botonesEditar[a].onclick = function(){
+				debugger;
+				alert(this.value);
+				habilitar_campos(botonesEditar[a].value);
+			}
+		}
+	}
+
+	function habilitar_campos(id){
+		alert(id);
+	}
+
+	window.onload= function(){ 
+		listener_edits();
 	}
 </script>
 </html>
