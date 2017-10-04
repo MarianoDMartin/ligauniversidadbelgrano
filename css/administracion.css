@@ -1,0 +1,18 @@
+.encabezado {
+  background: #000; }
+
+.paginas-internas .ruta {
+  background: #43C920;
+  color: #000; }
+
+.bienvenidos {
+  background: url("../img/administracion.png") no-repeat center; }
+
+#menu-principal ul a:hover {
+  color: #43C920; }
+
+#menu-principal ul li.active a {
+  color: #000;
+  background: #43C920; }
+
+/*# sourceMappingURL=administracion.css.map */

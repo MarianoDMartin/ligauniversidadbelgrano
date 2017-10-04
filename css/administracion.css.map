@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,WAAW;EACV,UAAU,EAAE,IAAI;;AAGjB,uBAAwB;EACtB,UAAU,EARL,OAAO;EASZ,KAAK,EAAE,IAAI;;AAGb,YAAY;EACX,UAAU,EAAE,iDAAiD;;AAG9D,0BAA0B;EACzB,KAAK,EAjBC,OAAO;;AAoBd,8BAA8B;EAC7B,KAAK,EAAE,IAAI;EACX,UAAU,EAtBJ,OAAO",
+"sources": ["administracion.scss"],
+"names": [],
+"file": "administracion.css"
+}
