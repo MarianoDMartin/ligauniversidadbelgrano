@@ -52,7 +52,7 @@ if ($_SESSION['usuario']=="")
             </div>
         </div>
     </section>
-	<main class="py-3">
+	<main class="py-3 medio">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -67,7 +67,7 @@ if ($_SESSION['usuario']=="")
 									<th>Apellido</th>
 									<th>Email</th>
 									<th>Telefono</th>
-									<th>Disponibilidad</th>
+									<th>Disp.</th>
 									<th>Equipo</th>
 									<th colspan="3"></th>
 								</tr>
@@ -88,19 +88,19 @@ if ($_SESSION['usuario']=="")
 										echo "<tr>";
 										echo '<td> <input disabled  readonly="readonly" type="text" size="3" name="idParticipante" id="pid' . $row['id_inscripto'] . '" value="'      . $row['id_inscripto']      . '"></td>';
 										echo '<td> <input disabled type="text" size="12" name="documento" id="pdocumento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"></td>';
-										echo '<td> <input disabled type="text" size="15" name="nombre" id="pnombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
-										echo '<td> <input disabled type="text" size="15" name="apellido" id="papellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
-										echo '<td> <input disabled type="text" size="35" name="email" id="pemail' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"></td>';
+										echo '<td> <input disabled type="text" size="12" name="nombre" id="pnombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
+										echo '<td> <input disabled type="text" size="12" name="apellido" id="papellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
+										echo '<td> <input disabled type="text" size="30" name="email" id="pemail' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"></td>';
 										echo '<td> <input disabled type="text" size="15" name="telefono" id="ptelefono' . $row['id_inscripto'] . '" value="'       . $row['telefono']       . '"></td>';
 										echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="pdisponibilidad' . $row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '"></td>';
 										echo '<td> <input disabled type="text" size="2"  name="id_equipo" id="pid_equipo' . $row['id_inscripto'] . '" value="'      . $row['id_equipo']      . '"></td>';
-										echo '<td> <button type="button" name="peditar" value="' . $row['id_inscripto'] . '" id="peditar' . $row['id_inscripto'] . '">';
+										echo '<td> <button type="button" name="peditar"  class="btn-editar" value="' . $row['id_inscripto'] . '" id="peditar' . $row['id_inscripto'] . '">';
 										echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
 										echo "</button></td>";
-										echo '<td> <button name="penviar" type="submit" id="penviar' . $row['id_inscripto'] . '" hidden>';
+										echo '<td> <button name="penviar" type="submit" class="btn-enviar" id="penviar' . $row['id_inscripto'] . '" hidden>';
 										echo '<i class="fa fa-check" aria-hidden="true"></i>';
 										echo "</button></td>";
-										echo '<td> <button name="pcancelar" type="button" id="pcancelar' . $row['id_inscripto'] . '" hidden>';
+										echo '<td> <button name="pcancelar" type="button" class="btn-cancelar" id="pcancelar' . $row['id_inscripto'] . '" hidden>';
 										echo '<i class="fa fa-times" aria-hidden="true"></i>';
 										echo "</button></td>";
 										echo "</tr>";
@@ -159,7 +159,7 @@ if ($_SESSION['usuario']=="")
 									<th>Apellido</th>
 									<th>Email</th>
 									<th>Telefono</th>
-									<th>Disponibilidad</th>
+									<th>Disp.</th>
 									<th colspan="3"></th>
 								</tr>
 							</thead>
@@ -179,18 +179,18 @@ if ($_SESSION['usuario']=="")
 										echo "<tr>";
 										echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="aid' . $row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '"></td>';
 										echo '<td> <input disabled type="text" size="12" name="documento" id="adocumento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"></td>';
-										echo '<td> <input disabled type="text" size="15" name="nombre" id="anombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
-										echo '<td> <input disabled type="text" size="15" name="apellido" id="aapellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
-										echo '<td> <input disabled type="text" size="35" name="email" id="aemail' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"></td>';
+										echo '<td> <input disabled type="text" size="12" name="nombre" id="anombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
+										echo '<td> <input disabled type="text" size="12" name="apellido" id="aapellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
+										echo '<td> <input disabled type="text" size="30" name="email" id="aemail' . $row['id_inscripto'] . '" value="'          . $row['email']          . '"></td>';
 										echo '<td> <input disabled type="text" size="15" name="telefono" id="atelefono' . $row['id_inscripto'] . '" value="'       . $row['telefono']       . '"></td>';
 										echo '<td> <input disabled type="text" size="5"  name="disponibilidad" id="adisponibilidad' . $row['id_inscripto'] . '" value="' . $row['disponibilidad'] . '"></td>';
-										echo '<td> <button type="button" name="aeditar" value="' . $row['id_inscripto'] . '" id="aeditar' . $row['id_inscripto'] . '">';
+										echo '<td> <button type="button" name="aeditar" class="btn-editar" value="' . $row['id_inscripto'] . '" id="aeditar' . $row['id_inscripto'] . '">';
 										echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
 										echo "</button></td>";
-										echo '<td> <button name="aenviar" type="submit" id="aenviar' . $row['id_inscripto'] . '" hidden>';
+										echo '<td> <button name="aenviar" type="submit" class="btn-enviar" id="aenviar' . $row['id_inscripto'] . '" hidden>';
 										echo '<i class="fa fa-check" aria-hidden="true"></i>';
 										echo "</button></td>";
-										echo '<td> <button name="acancelar" type="button" id="acancelar' . $row['id_inscripto'] . '" hidden>';
+										echo '<td> <button name="acancelar" type="button" class="btn-cancelar" id="acancelar' . $row['id_inscripto'] . '" hidden>';
 										echo '<i class="fa fa-times" aria-hidden="true"></i>';
 										echo "</button></td>";
 										echo "</tr>";

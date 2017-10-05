@@ -11,7 +11,8 @@ $celeste:#189782;
 }
 
 .bienvenidos{
-	background: url("../img/administracion.png") no-repeat center;
+	background: url("../img/administracion.jpg") no-repeat center;
+	background-color: hsla(0,0%,100%,0.5);
 }
 
 #menu-principal ul a:hover{
@@ -22,3 +23,56 @@ $celeste:#189782;
 	color: #000;
 	background: $verde; 
 }
+
+.table-responsive{
+	display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table{
+	font-size: 1rem;
+}
+
+.table input{
+	font-size: 0.8rem;
+}
+
+.btn-enviar,
+.btn-editar,
+.btn-cancelar{
+	border:0;
+	font-size: 1rem;
+	margin: 0;
+	background: transparent;
+	transition: all .5s ease;
+	opacity: 0.5;
+}
+
+.btn-enviar:hover,
+.btn-editar:hover,
+.btn-cancelar:hover{
+	opacity: 1;
+}
+
+.btn-enviar{
+	color: green;
+}
+
+.btn-editar{
+	color: brown;
+}
+
+.btn-cancelar{
+	color: red;
+}
+
+.medio{
+	background-image: url("../img/fondo1.png");
+}
+
+
+
+
+
+
