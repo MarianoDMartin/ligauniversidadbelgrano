@@ -9,26 +9,25 @@ if (mysqli_connect_errno()) {
 		" (" . mysqli_connect_errno() . ")"
 	);
 }
-$id = $_POST['idParticipante'];
+$id = $_POST['idAyudante'];
 $documento = $_POST['documento'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $email = $_POST['email'];
 $telefono = $_POST['telefono'];
 $disponibilidad = $_POST['disponibilidad'];
-$equipo = $_POST['id_equipo'];
 
-$query = "UPDATE participantes_desarrollo set documento='$documento' , nombre='$nombre' , apellido='$apellido' , email='$email', telefono='$telefono' , disponibilidad='$disponibilidad' , id_equipo='$equipo' WHERE id_inscripto='".$id."'";
+$query = "UPDATE ayudantes_desarrollo set documento='$documento' , nombre='$nombre' , apellido='$apellido' , email='$email', telefono='$telefono' , disponibilidad='$disponibilidad' WHERE id_inscripto='".$id."'";
 
 
 $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
-if ($result>0) {
+$rows=mysqli_affected_rows($connection);
+if ($rows>0) {
     echo "<script language='javascript'>
     alert('Modificacion realizada corrextamente');
     window.location.href = '../inscriptos.php';
     </script>";
 } else {
-
     echo "<script language='javascript'>
     alert('Hubo un error, verifique la modificacion que quiere realizar e intente nuevamente');
     window.location.href = '../inscriptos.php';

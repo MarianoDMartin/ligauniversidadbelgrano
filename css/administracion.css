@@ -55,4 +55,23 @@
 .medio {
   background-image: url("../img/fondo1.png"); }
 
+.padding-top {
+  padding-top: 2rem; }
+
+.border-top {
+  border-top: 1px solid #939292; }
+
+.btn-baja {
+  color: #fff;
+  background-color: red;
+  border-color: transparent;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  opacity: 0.5; }
+
+.btn-baja:hover {
+  background-color: red;
+  border-color: transparent;
+  opacity: 1; }
+
 /*# sourceMappingURL=administracion.css.map */

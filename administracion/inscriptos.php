@@ -27,7 +27,7 @@ if ($_SESSION['usuario']=="")
 				</button>
 				<nav id="menu-principal" class="collapse">
 					<ul>
-						<li class="active"><a href="./inscripctos.php">Inscriptos</a></li>
+						<li class="active"><a href="./inscriptos.php">Inscriptos</a></li>
 						<li><a href="./torneo.php">Torneo</a></li>
 						<li><a href="./resultados.php">Resultados</a></li>
 						<li><a href="php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
@@ -55,7 +55,7 @@ if ($_SESSION['usuario']=="")
 	<main class="py-3 medio">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12 padding-top">
 					<h1>Participantes</h1>
 					<div class="table-responsive">
 						<table class="table table-condensed table-hover table-striped" width="60%" cellspacing="0">
@@ -80,7 +80,7 @@ if ($_SESSION['usuario']=="")
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();
 									}
 
-									$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
+									$result = mysqli_query($con,"SELECT * FROM participantes_desarrollo where fecha_hasta is null");
 
 									while($row = mysqli_fetch_array($result))
 									{	
@@ -125,7 +125,7 @@ if ($_SESSION['usuario']=="")
 						echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						}
 
-						$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
+						$result = mysqli_query($con,"SELECT * FROM participantes_desarrollo where fecha_hasta is null");
 						$rows=mysqli_affected_rows($con);
 						echo '<label class="cantidad_inscriptos">'. $rows .'<label>';
 
@@ -147,7 +147,7 @@ if ($_SESSION['usuario']=="")
 				</div>
 			</div>
 	      	<div class="row">
-	        	<div class="col-md-12">
+	        	<div class="col-md-12 padding-top border-top">
 		        	<h1>Ayudantes</h1>
 		        	<div class="table-responsive">
 						<table class="table table-condensed table-hover table-striped" width="60%" cellspacing="0">
@@ -171,13 +171,13 @@ if ($_SESSION['usuario']=="")
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();
 									}
 
-									$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
+									$result = mysqli_query($con,"SELECT * FROM ayudantes_desarrollo where fecha_hasta is null");
 
 									while($row = mysqli_fetch_array($result))
 									{	
-										echo '<form name="participante" class="" action="." runat="server" method="POST">';
+										echo '<form name="participante" class="" action="php/updateAyudante.php" runat="server" method="POST">';
 										echo "<tr>";
-										echo '<td> <input disabled type="text" size="3"  name="id_inscripto" id="aid' . $row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '"></td>';
+										echo '<td> <input disabled type="text" size="3"  name="idAyudante" id="aid' . $row['id_inscripto'] . '" value="'   . $row['id_inscripto']   . '"></td>';
 										echo '<td> <input disabled type="text" size="12" name="documento" id="adocumento' . $row['id_inscripto'] . '" value="'      . $row['documento']      . '"></td>';
 										echo '<td> <input disabled type="text" size="12" name="nombre" id="anombre' . $row['id_inscripto'] . '" value="'         . $row['nombre']         . '"></td>';
 										echo '<td> <input disabled type="text" size="12" name="apellido" id="aapellido' . $row['id_inscripto'] . '" value="'       . $row['apellido']       . '"></td>';
@@ -215,7 +215,7 @@ if ($_SESSION['usuario']=="")
 						echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						}
 
-						$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
+						$result = mysqli_query($con,"SELECT * FROM ayudantes_desarrollo where fecha_hasta is null");
 						$rows=mysqli_affected_rows($con);
 						echo '<label class="cantidad_inscriptos">'. $rows .'<label>';
 
@@ -236,7 +236,7 @@ if ($_SESSION['usuario']=="")
 					</form>
 				</div>
 			</div>
-	    	<div class="row">
+	    	<div class="row padding-top border-top">
 	    		<div class="col-md-6">
 			    	<h3>Equipos disponibles</h3>
 			    	<div class="table-responsive">
