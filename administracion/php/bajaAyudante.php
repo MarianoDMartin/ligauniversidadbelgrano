@@ -11,7 +11,7 @@ if (mysqli_connect_errno()) {
 }
 $id_baja = $_POST['baja_part'];
 
-$query = "UPDATE ayudantes_desarrollo set fecha_hasta = now() WHERE id_inscripto='".$id_baja."'";
+$query = "UPDATE Ayudantes set fecha_hasta = now() WHERE id_inscripto='".$id_baja."'";
 $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
 $rows=mysqli_affected_rows($connection);
 if ($rows>0) {

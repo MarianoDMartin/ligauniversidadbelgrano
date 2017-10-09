@@ -52,6 +52,13 @@
 .btn-cancelar {
   color: red; }
 
+.btn-error {
+  color: red;
+  border: 0;
+  font-size: 1rem;
+  margin: 0;
+  background: transparent; }
+
 .medio {
   background-image: url("../img/fondo1.png"); }
 

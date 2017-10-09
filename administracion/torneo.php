@@ -30,7 +30,7 @@ if ($_SESSION['usuario']=="")
 						<li><a href="./inscriptos.php">Inscriptos</a></li>
 						<li class="active"><a href="./torneo.php">Torneo</a></li>
 						<li><a href="./resultados.php">Resultados</a></li>
-						<li><a href="php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+						<li><a href="../php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 				</button></a></li>
 					</ul>
 				</nav>
@@ -68,7 +68,8 @@ if ($_SESSION['usuario']=="")
 																f.fecha,
 																h.horario,
 																p.fecha as id_fecha,
-																p.hora as id_hora
+																p.hora as id_hora,
+																p.flag_error
 																from 	Partidos p,
 																		horarios h,
 																		fechas_disponibles f,
@@ -130,6 +131,8 @@ if ($_SESSION['usuario']=="")
 											}
 										}
 										echo "</select></td>";
+										
+										
 										echo '<td> <input hidden type="text" name="id_partido" value="' . $row['id_partido'] . '"></td>';
 										echo '<td> <button type="button" name="editar"  class="btn-editar" value="' . $row['id_partido'] . '" id="editar' . $row['id_partido'] . '">';
 										echo '<i class="fa fa-pencil" aria-hidden="true"></i>';
@@ -140,6 +143,11 @@ if ($_SESSION['usuario']=="")
 										echo '<td> <button name="cancelar" type="button" class="btn-cancelar" id="cancelar' . $row['id_partido'] . '" hidden>';
 										echo '<i class="fa fa-times" aria-hidden="true"></i>';
 										echo "</button></td>";
+										if($row['flag_error']){
+											echo '<td><button type="button" name="error" class="btn-error">';
+											echo '<i class="fa fa-exclamation" aria-hidden="true"></i>';
+											echo "</button></td>";
+										}
 										echo "</tr>";
 										echo "</form>";
 									}
@@ -153,7 +161,7 @@ if ($_SESSION['usuario']=="")
 						$numRonda= $nronda['ronda'];
 						$numRonda++;
 
-						$result = mysqli_query($con,"SELECT * FROM participantes_desarrollo where fecha_hasta is null");
+						$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
 						$cantidadParticipantes=mysqli_affected_rows($con);
 
 						if($cantidadParticipantes>1){

@@ -20,9 +20,9 @@ $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
 $rows=mysqli_affected_rows($connection);
 if($rows>0){
     if($goles1>$goles2){
-        $query = "UPDATE participantes_desarrollo set fecha_hasta = now() WHERE id_inscripto='".$id_participante2."'";
+        $query = "UPDATE Participantes set fecha_hasta = now() WHERE id_inscripto='".$id_participante2."'";
     }else{
-        $query = "UPDATE participantes_desarrollo set fecha_hasta = now() WHERE id_inscripto='".$id_participante1."'";
+        $query = "UPDATE Participantes set fecha_hasta = now() WHERE id_inscripto='".$id_participante1."'";
     }
     $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
 }

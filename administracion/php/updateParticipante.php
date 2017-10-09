@@ -18,7 +18,7 @@ $telefono = $_POST['telefono'];
 $disponibilidad = $_POST['disponibilidad'];
 $equipo = $_POST['id_equipo'];
 
-$query = "UPDATE participantes_desarrollo set documento='$documento' , nombre='$nombre' , apellido='$apellido' , email='$email', telefono='$telefono' , disponibilidad='$disponibilidad' , id_equipo='$equipo' WHERE id_inscripto='".$id."'";
+$query = "UPDATE Participantes set documento='$documento' , nombre='$nombre' , apellido='$apellido' , email='$email', telefono='$telefono' , disponibilidad='$disponibilidad' , id_equipo='$equipo' WHERE id_inscripto='".$id."'";
 
 
 $result=mysqli_query($connection, $query) or die(mysqli_error($connection));

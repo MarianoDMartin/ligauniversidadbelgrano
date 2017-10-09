@@ -23,8 +23,7 @@ if ($result){
         $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
     }
     echo "<script language='javascript'>
-    alert('Ronda creada correctamente');
-    window.location.href = '../torneo.php';
+    window.location.href = 'generarPartidos.php';
     </script>";
 }else{
     echo "<script language='javascript'>

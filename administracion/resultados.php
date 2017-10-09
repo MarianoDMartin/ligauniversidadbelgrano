@@ -30,7 +30,7 @@ if ($_SESSION['usuario']=="")
 						<li><a href="./inscriptos.php">Inscriptos</a></li>
 						<li><a href="./torneo.php">Torneo</a></li>
 						<li class="active"><a href="./resultados.php">Resultados</a></li>
-						<li><a href="php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+						<li><a href="../php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 				</button></a></li>
 					</ul>
 				</nav>

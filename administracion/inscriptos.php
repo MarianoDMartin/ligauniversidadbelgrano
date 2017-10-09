@@ -30,7 +30,7 @@ if ($_SESSION['usuario']=="")
 						<li class="active"><a href="./inscriptos.php">Inscriptos</a></li>
 						<li><a href="./torneo.php">Torneo</a></li>
 						<li><a href="./resultados.php">Resultados</a></li>
-						<li><a href="php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+						<li><a href="../php/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 				</button></a></li>
 					</ul>
 				</nav>
@@ -80,7 +80,7 @@ if ($_SESSION['usuario']=="")
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();
 									}
 
-									$result = mysqli_query($con,"SELECT * FROM participantes_desarrollo where fecha_hasta is null");
+									$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
 
 									while($row = mysqli_fetch_array($result))
 									{	
@@ -125,7 +125,7 @@ if ($_SESSION['usuario']=="")
 						echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						}
 
-						$result = mysqli_query($con,"SELECT * FROM participantes_desarrollo where fecha_hasta is null");
+						$result = mysqli_query($con,"SELECT * FROM Participantes where fecha_hasta is null");
 						$rows=mysqli_affected_rows($con);
 						echo '<label class="cantidad_inscriptos">'. $rows .'<label>';
 
@@ -171,7 +171,7 @@ if ($_SESSION['usuario']=="")
 									echo "Failed to connect to MySQL: " . mysqli_connect_error();
 									}
 
-									$result = mysqli_query($con,"SELECT * FROM ayudantes_desarrollo where fecha_hasta is null");
+									$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
 
 									while($row = mysqli_fetch_array($result))
 									{	
@@ -215,7 +215,7 @@ if ($_SESSION['usuario']=="")
 						echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						}
 
-						$result = mysqli_query($con,"SELECT * FROM ayudantes_desarrollo where fecha_hasta is null");
+						$result = mysqli_query($con,"SELECT * FROM Ayudantes where fecha_hasta is null");
 						$rows=mysqli_affected_rows($con);
 						echo '<label class="cantidad_inscriptos">'. $rows .'<label>';
 

@@ -242,4 +242,26 @@
 .label_cantidad_inscriptos {
   font-size: 2rem; }
 
+.ronda {
+  padding: 20px; }
+
+.partido {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.ronda h1 {
+  color: #24096B; }
+
+.border {
+  border: 3px solid #2B2B2B !important; }
+
+.pendiente {
+  background: #FFD700; }
+
+.jugado {
+  background: #882EAF; }
+
 /*# sourceMappingURL=estilos.css.map */
