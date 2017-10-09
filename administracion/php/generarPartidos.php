@@ -1,0 +1,278 @@
+<?php
+error_reporting(0);
+
+class Ronda{
+    public $items = array();
+
+
+    public function addItem($obj, $key = null) {
+        if ($key == null) {
+            $this->items[] = $obj;
+        }
+        else {
+            $this->items[$key] = $obj;
+        }
+    }
+
+    public function deleteItem($key) {
+        if (isset($this->items[$key])) {
+            unset($this->items[$key]);
+        }
+    }
+
+    public function getItem($key) {
+        if (isset($this->items[$key])) {
+            return $this->items[$key];
+        }
+    }
+
+    public function keys() {
+        return array_keys($this->items);
+    }
+
+    public function length() {
+        return count($this->items);
+    }
+
+    public function getItems(){
+        return $this->items;
+    }
+
+    public function keyExists($key) {
+        return isset($this->items[$key]);
+    }
+
+    public function generarPosibilidades($items = null){
+       if ($items == null) {
+        foreach($this->items as $participante ){
+            $participante->cargarPosibilidades($this->items);
+        }
+    }
+    else {
+        foreach($items as $participante ){
+            $participante->cargarPosibilidades($items);
+        }
+    }
+}
+}
+
+class Participante
+{
+    public $id;
+    public $disp1 = false;
+    public $disp2 = false;
+    public $disp3 = false;
+    public $disp4 = false;
+    public $disp5 = false;
+    public $posibilidades = array();
+
+    public function __construct($id, $disponibilidad) {
+        $this->id = $id;
+        $this->procesar_disponibilidad($disponibilidad);
+    }
+
+    public function cargarPosibilidades($participantes){
+        foreach ($participantes as $participante) {
+            if (!($this->id == $participante->id))
+            {
+
+             $matchean = (($this->disp1 and $participante->disp1) or ($this->disp2 and $participante->disp2) or ($this->disp3 and $participante->disp3) or ($this->disp4 and $participante->disp4) or ($this->disp5 and $participante->disp5));
+
+             if ($matchean == true) {
+                $this->posibilidades[] = $participante->id;
+            }
+        }
+    }
+}
+
+public function procesar_disponibilidad($disponibilidad){
+    $this->disp1 = (bool) substr($disponibilidad, 0,1);
+    $this->disp2 = (bool) substr($disponibilidad, 1,1);
+    $this->disp3 = (bool) substr($disponibilidad, 2,1);
+    $this->disp4 = (bool) substr($disponibilidad, 3,1);
+    $this->disp5 = (bool) substr($disponibilidad, 4,1);
+}
+
+public function toString(){
+    echo "id original: ". $this->id . "  Contrincantes: ";
+    echo "<pre>";
+    print_r($this->posibilidades);
+    echo "</pre>";
+}
+}
+
+
+function hayMatch($part1, $part2) {
+    if (($part1->disp1 and $part2->disp1) or ($part1->disp2 and $part2->disp2) or ($part1->disp3 and $part2->disp3) or ($part1->disp4 and $part2->disp4) or ($part1->disp5 and $part2->disp5)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function addPartido($Partidos, $part1, $part2){
+      if (rand(0, 1)) { 
+        if ($part1->disp1 and $part2->disp1){
+            $partido = array($part1->id, $part2->id, "1");
+        } else if ($part1->disp2 and $part2->disp2){
+            $partido = array($part1->id, $part2->id, "2");
+        } else if ($part1->disp3 and $part2->disp3){
+            $partido = array($part1->id, $part2->id, "3");
+        } else if ($part1->disp4 and $part2->disp4){
+            $partido = array($part1->id, $part2->id, "4");
+        } else if ($part1->disp5 and $part2->disp5){
+            $partido = array($part1->id, $part2->id, "5");
+        }
+    }else{
+        if ($part1->disp5 and $part2->disp5){
+            $partido = array($part1->id, $part2->id, "5");
+        } else if ($part1->disp4 and $part2->disp4){
+            $partido = array($part1->id, $part2->id, "4");
+        } else if ($part1->disp3 and $part2->disp3){
+            $partido = array($part1->id, $part2->id, "3");
+        } else if ($part1->disp2 and $part2->disp2){
+            $partido = array($part1->id, $part2->id, "2");
+        } else if ($part1->disp1 and $part2->disp1){
+            $partido = array($part1->id, $part2->id, "1");
+        }
+    }
+    $Partidos[] = $partido;
+    return $Partidos;
+
+}
+
+function eliminarYaInsertados($participantes, $part1, $part2){
+    foreach ($participantes as $key => $value) {
+        if (($value->id == $part1->id) or ($value->id == $part2->id)){
+            unset($participantes[$key]);
+        }
+    }
+    return array_values($participantes);
+}
+
+function deletePartido($Partidos){
+    array_pop($Partidos);
+}
+
+function generarPartidos($Partidos, $participantes, $part_actual,$total_participantes, $salida) {
+    global $salida;
+    if ($part_actual == ($total_participantes)/2) {
+        $salida = $Partidos;
+        return true;
+    }
+    for ($i=0; $i < count($participantes); $i++) { 
+        if (hayMatch($participantes[$i], $participantes[$i+1])) { //si hay combinacion posible
+            //inserto partido 
+            $Partidos = addPartido($Partidos, $participantes[$i], $participantes[$i+1]);
+            $part_actual = $part_actual+1;
+            $participantes = eliminarYaInsertados($participantes, $participantes[$i], $participantes[$i+1]);
+            /*echo "<pre>";
+            print_r($Partidos);
+            echo "</pre> <br>";
+            echo $part_actual;*/
+            if (generarPartidos($Partidos, $participantes, $part_actual, $total_participantes, $salida)) {
+                return true;
+            }
+            //si no hubo solucion saco ese partido
+            deletePartido($Partidos);
+        }
+    }
+    //ver si agregando $salida = $Partidos; me quedo con los mejores
+    return false;
+}
+
+
+//conecto a la base
+$connection = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
+if (mysqli_connect_errno()) {
+    die("<script language='javascript'>
+        alert('Hubo un error de conexion, intente nuevamente por favor');
+        window.location.href = ../inscripcion.php';
+        </script>");
+}
+
+$resultRonda = mysqli_query($connection, "SELECT ronda from Partidos order by ronda desc limit 1");
+$nronda = mysqli_fetch_array($resultRonda);
+$numRonda= $nronda['ronda'];
+$numRonda++;
+
+$ronda = new Ronda();
+
+$result_disp = mysqli_query($connection,"SELECT id_inscripto, disponibilidad FROM Participantes where fecha_hasta is null limit 64");
+
+while($row = mysqli_fetch_array($result_disp))
+{
+    $ronda->addItem(new Participante($row['id_inscripto'], $row['disponibilidad']));
+}
+
+$Partidos = array();
+$salida = array();
+$participantes = $ronda->getItems();
+$Partidos_final = generarPartidos($Partidos, $participantes, 0, count($participantes), $salida);
+//$ronda->generarPosibilidades();
+//echo $ronda->getItem(2)->toString();
+/*echo "<pre>";
+print_r($salida);
+echo "</pre> <br>";*/
+
+$query = "SELECT id_fecha FROM fechas_disponibles WHERE ronda = " . $numRonda;
+$result = mysqli_query($connection, $query);
+$cant_fechas = mysqli_num_rows($result);
+while($row = mysqli_fetch_array($result))
+{
+    $fechas[]=($row['id_fecha']);
+}
+
+$query = "SELECT cantidad from consolas";
+$result = mysqli_query($connection, $query);
+$consolas = mysqli_fetch_array($result)['cantidad'];
+
+$partidos_aux = $salida;
+for ($i=0; $i < $cant_fechas; $i++) { 
+    for ($j=0; $j < $consolas; $j++) { 
+        for ($k=1; $k < 6; $k++) { //hardodeados los horarios
+            $asignado = false;
+            foreach ($partidos_aux as $key => $value) {
+                if (($value[2] == $k) and !($asignado) ){
+                    $partidos_fecha[] = array($value[0],$value[1],$value[2],$fechas[$i]);
+                    unset($partidos_aux[$key]);
+                    $partidos_aux = array_values($partidos_aux);
+                    $asignado = true;
+                    //$partidos_aux = array_diff($partidos_aux, array($value[0],$value[1],$value[2]));
+                }                 
+            }
+        }
+    }
+};
+
+/*
+echo "<pre>";
+print_r($partidos_fecha);
+echo "</pre> <br>";
+
+echo "<pre>";
+print_r($partidos_aux);
+echo "</pre> <br>";
+*/
+
+
+foreach ($partidos_fecha as $key => $value) {
+     $query  = "INSERT INTO Partidos ( id_participante1, id_participante2, ronda,hora, fecha) 
+        VALUES ('".$value[0]."','" . $value[1] . "','" . $numRonda . "','" . $value[2]."','".$value[3]."')";
+        $result = mysqli_query($connection, $query);
+    };
+
+foreach ($partidos_aux as $key => $value) {
+     $query  = "INSERT INTO Partidos ( id_participante1, id_participante2, ronda,hora, flag_error) 
+        VALUES ('".$value[0]."','".$value[1] . "','" . $numRonda . "','" . $value[2]."','sin fecha')";
+        $result = mysqli_query($connection, $query);
+};
+
+mysqli_close($connection);
+
+echo "<script language='javascript'>
+alert('La ronda se generó correctamente');
+    window.location.href = '../torneo.php';
+    </script>";
+
+?>

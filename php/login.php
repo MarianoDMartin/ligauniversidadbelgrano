@@ -30,7 +30,7 @@ if (isset($_POST['usuario']) and isset($_POST['contraseña'])){
 		$_SESSION['usuario'] = $usuario;
 		echo "<script language='javascript'>
 		alert('Bienvenido!!!');
-		window.location.href = '../administracion.php';
+		window.location.href = '../administracion/inscriptos.php';
 		</script>";
 	}else{
 

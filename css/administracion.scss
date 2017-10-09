@@ -1,0 +1,102 @@
+$verde:#43C920;
+$celeste:#189782;
+
+.encabezado{
+	background: #000;
+}
+
+.paginas-internas .ruta {
+  background: $verde;
+  color: #000; 
+}
+
+.bienvenidos{
+	background: url("../img/administracion.jpg") no-repeat center;
+	background-color: hsla(0,0%,100%,0.5);
+}
+
+#menu-principal ul a:hover{
+	color: $verde;
+}
+
+#menu-principal ul li.active a{
+	color: #000;
+	background: $verde; 
+}
+
+.table-responsive{
+	display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table{
+	font-size: 1rem;
+}
+
+.table input{
+	font-size: 0.8rem;
+}
+
+.btn-enviar,
+.btn-editar,
+.btn-cancelar{
+	border:0;
+	font-size: 1rem;
+	margin: 0;
+	background: transparent;
+	transition: all .5s ease;
+	opacity: 0.5;
+}
+
+.btn-enviar:hover,
+.btn-editar:hover,
+.btn-cancelar:hover{
+	opacity: 1;
+}
+
+.btn-enviar{
+	color: green;
+}
+
+.btn-editar{
+	color: brown;
+}
+
+.btn-cancelar{
+	color: red;
+}
+
+.btn-error{
+	color: red;
+	border:0;
+	font-size: 1rem;
+	margin: 0;
+	background: transparent;
+}
+
+.medio{
+	background-image: url("../img/fondo1.png");
+}
+
+.padding-top{
+	padding-top: 2rem;
+}
+
+.border-top{
+	border-top: 1px solid #939292;
+}
+
+.btn-baja{
+	color: #fff;
+	background-color: red;
+	border-color: transparent;
+	transition: all .5s ease;
+	opacity: 0.5;
+}
+
+.btn-baja:hover{
+	background-color: red;
+	border-color: transparent;
+	opacity: 1;
+}

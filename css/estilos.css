@@ -16,7 +16,16 @@
   width: 175px;
   height: auto; }
 
-.boton-menu {
+.administracion {
+  height: auto;
+  width: 300px; }
+
+.administracion h1 {
+  font-size: 1.5rem;
+  color: #fff; }
+
+.boton-menu,
+.boton-sing-out {
   border: 0;
   font-size: 2rem;
   margin: 0;
@@ -233,11 +242,26 @@
 .label_cantidad_inscriptos {
   font-size: 2rem; }
 
-.btn-baja {
-  color: #fff;
-  background-color: red;
-  border-color: transparent;
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease; }
+.ronda {
+  padding: 20px; }
+
+.partido {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.ronda h1 {
+  color: #24096B; }
+
+.border {
+  border: 3px solid #2B2B2B !important; }
+
+.pendiente {
+  background: #FFD700; }
+
+.jugado {
+  background: #882EAF; }
 
 /*# sourceMappingURL=estilos.css.map */
