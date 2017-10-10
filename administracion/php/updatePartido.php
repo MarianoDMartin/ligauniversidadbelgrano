@@ -15,7 +15,7 @@ $horario = $_POST['horarios'];
 
 $query = "UPDATE Partidos set fecha='$fecha' , hora='$horario' WHERE id_partido='".$id."'";
 $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
-
+mysqli_close($connection);
 if ($result) {
     echo "<script language='javascript'>
     alert('Modificacion realizada corrextamente');

@@ -22,10 +22,12 @@ if ($result){
         $query = "INSERT INTO fechas_disponibles(fecha,ronda) VALUE ('" . $fecha . "','" . $ronda . "');";
         $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
     }
+    mysqli_close($connection);
     echo "<script language='javascript'>
     window.location.href = 'generarPartidos.php';
     </script>";
 }else{
+    mysqli_close($connection);
     echo "<script language='javascript'>
     alert('Hubo un error, verifique los datos ingresados e intente nuevamente');
     window.location.href = '../torneo.php';

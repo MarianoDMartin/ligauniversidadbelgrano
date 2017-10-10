@@ -151,7 +151,6 @@ if ($_SESSION['usuario']=="")
 										echo "</tr>";
 										echo "</form>";
 									}
-									mysqli_close($con);
 									?>
 								</tbody>
 							</table>
@@ -192,11 +191,11 @@ if ($_SESSION['usuario']=="")
 		                    	</div>
 							</form>
 							<?php
-							mysqli_close($con);
 						}else{
 							echo "<h2>El Torneo está terminado! Gracias por utilizar el sistema!!!</h2>";
 						}
 					}
+					mysqli_close($con);
 				?>
 			</div>
 		</div>

@@ -26,6 +26,7 @@ if($rows>0){
     }
     $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
 }
+mysqli_close($connection);
 if ($rows>0) {
     echo "<script language='javascript'>
     alert('Carga realizada correctamente');

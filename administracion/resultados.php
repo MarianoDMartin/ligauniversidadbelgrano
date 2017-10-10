@@ -124,7 +124,6 @@ if ($_SESSION['usuario']=="")
 										echo "</tr>";
 										echo "</form>";
 									}
-									mysqli_close($con);
 									?>
 								</tbody>
 							</table>
@@ -133,7 +132,8 @@ if ($_SESSION['usuario']=="")
 					}else{
 						echo "<h2>No tenés resultados pendientes para cargar! FELICITACIONES!!!</h2>";
 						echo "<h2>Ya podés generar la próxima Ronda en la sección <a href='torneo.php'>Torneo</a></h2>";
-					}	
+					}
+					mysqli_close($con);	
 				?>
 			</div>
 		</div>

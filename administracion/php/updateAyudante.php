@@ -22,6 +22,7 @@ $query = "UPDATE Ayudantes set documento='$documento' , nombre='$nombre' , apell
 
 $result=mysqli_query($connection, $query) or die(mysqli_error($connection));
 $rows=mysqli_affected_rows($connection);
+mysqli_close($connection);
 if ($rows>0) {
     echo "<script language='javascript'>
     alert('Modificacion realizada corrextamente');
