@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 
 class Ronda{
     public $items = array();
@@ -110,34 +110,38 @@ function hayMatch($part1, $part2) {
     }
 }
 
-function addPartido($Partidos, $part1, $part2){
-      if (rand(0, 1)) { 
-        if ($part1->disp1 and $part2->disp1){
-            $partido = array($part1->id, $part2->id, "1");
-        } else if ($part1->disp2 and $part2->disp2){
-            $partido = array($part1->id, $part2->id, "2");
-        } else if ($part1->disp3 and $part2->disp3){
-            $partido = array($part1->id, $part2->id, "3");
-        } else if ($part1->disp4 and $part2->disp4){
-            $partido = array($part1->id, $part2->id, "4");
-        } else if ($part1->disp5 and $part2->disp5){
-            $partido = array($part1->id, $part2->id, "5");
+function addPartido($Partidos, $part1, $part2, $coincide = true){
+    if ($coincide) {
+        if (rand(0, 1)) { 
+            if ($part1->disp1 and $part2->disp1){
+                $partido = array($part1->id, $part2->id, "1");
+            } else if ($part1->disp2 and $part2->disp2){
+                $partido = array($part1->id, $part2->id, "2");
+            } else if ($part1->disp3 and $part2->disp3){
+                $partido = array($part1->id, $part2->id, "3");
+            } else if ($part1->disp4 and $part2->disp4){
+                $partido = array($part1->id, $part2->id, "4");
+            } else if ($part1->disp5 and $part2->disp5){
+                $partido = array($part1->id, $part2->id, "5");
+            }
+        }else{
+            if ($part1->disp5 and $part2->disp5){
+                $partido = array($part1->id, $part2->id, "5");
+            } else if ($part1->disp4 and $part2->disp4){
+                $partido = array($part1->id, $part2->id, "4");
+            } else if ($part1->disp3 and $part2->disp3){
+                $partido = array($part1->id, $part2->id, "3");
+            } else if ($part1->disp2 and $part2->disp2){
+                $partido = array($part1->id, $part2->id, "2");
+            } else if ($part1->disp1 and $part2->disp1){
+                $partido = array($part1->id, $part2->id, "1");
+            }
         }
-    }else{
-        if ($part1->disp5 and $part2->disp5){
-            $partido = array($part1->id, $part2->id, "5");
-        } else if ($part1->disp4 and $part2->disp4){
-            $partido = array($part1->id, $part2->id, "4");
-        } else if ($part1->disp3 and $part2->disp3){
-            $partido = array($part1->id, $part2->id, "3");
-        } else if ($part1->disp2 and $part2->disp2){
-            $partido = array($part1->id, $part2->id, "2");
-        } else if ($part1->disp1 and $part2->disp1){
-            $partido = array($part1->id, $part2->id, "1");
-        }
+    } else {
+        $partido = array($part1->id, $part2->id, "9");
     }
-    $Partidos[] = $partido;
-    return $Partidos;
+$Partidos[] = $partido;
+return $Partidos;
 
 }
 
@@ -152,32 +156,85 @@ function eliminarYaInsertados($participantes, $part1, $part2){
 
 function deletePartido($Partidos){
     array_pop($Partidos);
+    return $Partidos;
 }
 
-function generarPartidos($Partidos, $participantes, $part_actual,$total_participantes, $salida) {
+function generarPartidos($Partidos, $participantes, $participantes_borrados, $partido_actual,$total_participantes, $salida, $max_partidos) {
     global $salida;
-    if ($part_actual == ($total_participantes)/2) {
+    global $participantes_faltantes;
+    $participantes_faltantes = $participantes;
+
+    if ($partido_actual == ($total_participantes)/2) {
         $salida = $Partidos;
         return true;
     }
-    for ($i=0; $i < count($participantes); $i++) { 
+
+    for ($i=0; $i < (count($participantes) -1 ); $i++) { 
+        //echo "Compara: ". $i ." con: ".($i+1)." <br>";
         if (hayMatch($participantes[$i], $participantes[$i+1])) { //si hay combinacion posible
+            
             //inserto partido 
             $Partidos = addPartido($Partidos, $participantes[$i], $participantes[$i+1]);
-            $part_actual = $part_actual+1;
+            $partido_actual = $partido_actual+1;
+
+            //a partir de la combinacion encontrada, saco los participantes y los paso a borrados
+            array_push($participantes_borrados, $participantes[$i], $participantes[$i+1]);
             $participantes = eliminarYaInsertados($participantes, $participantes[$i], $participantes[$i+1]);
-            /*echo "<pre>";
+            
+            //voy guardando la mejor combinacion de partidos
+            if ($max_partidos < $partido_actual){
+                $salida = $Partidos;
+                $max_partidos = $max_partidos+1;
+                $participantes_faltantes = $participantes;
+            }
+
+            /*
+            echo "<pre>";
             print_r($Partidos);
             echo "</pre> <br>";
-            echo $part_actual;*/
-            if (generarPartidos($Partidos, $participantes, $part_actual, $total_participantes, $salida)) {
+            echo $partido_actual;
+            echo "<br> Valor de i: ";
+            echo $i;
+            echo "<br>"; 
+            */
+            
+            //busco recursivamente una solucion para los participantes restantes
+            if (generarPartidos($Partidos, $participantes, $participantes_borrados,$partido_actual, $total_participantes, $salida, $max_partidos)) {
                 return true;
             }
+            
+            /*
+            echo "Saliendo del genrar partidos: ";
+            echo "<br> Valor de i: ";
+            echo $i;
+            echo "<br>"; 
+            echo "<br>";
+            echo "<pre>";
+            print_r($participantes);
+            echo "</pre> <br>";
+            */
+
             //si no hubo solucion saco ese partido
-            deletePartido($Partidos);
+            $Partidos = deletePartido($Partidos);
+
+            //devuelvo los participantes a la lista de vigentes y los saco de borrados
+            array_push($participantes, array_pop($participantes_borrados), array_pop($participantes_borrados));
+            $participantes = array_values($participantes);
+
+            //bajo la cantidad de partidos
+            $partido_actual = $partido_actual-1;
+
+            /*
+            echo "Dsp del delete: ";
+            echo "<br>";
+            echo "<pre>";
+            print_r($participantes);
+            echo "</pre> <br>";
+            */
+            
         }
     }
-    //ver si agregando $salida = $Partidos; me quedo con los mejores
+    //$salida = $Partidos; 
     return false;
 }
 
@@ -191,29 +248,30 @@ if (mysqli_connect_errno()) {
         </script>");
 }
 
+
 $resultRonda = mysqli_query($connection, "SELECT ronda from Partidos order by ronda desc limit 1");
 $nronda = mysqli_fetch_array($resultRonda);
 $numRonda= $nronda['ronda'];
 $numRonda++;
 
 $ronda = new Ronda();
-
-$result_disp = mysqli_query($connection,"SELECT id_inscripto, disponibilidad FROM Participantes where fecha_hasta is null limit 64");
+$result_disp = mysqli_query($connection,"SELECT id_inscripto, disponibilidad FROM Participantes WHERE fecha_hasta is null");
 
 while($row = mysqli_fetch_array($result_disp))
 {
     $ronda->addItem(new Participante($row['id_inscripto'], $row['disponibilidad']));
 }
 
+$participantes_borrados =array();
 $Partidos = array();
 $salida = array();
 $participantes = $ronda->getItems();
-$Partidos_final = generarPartidos($Partidos, $participantes, 0, count($participantes), $salida);
-//$ronda->generarPosibilidades();
-//echo $ronda->getItem(2)->toString();
-/*echo "<pre>";
-print_r($salida);
-echo "</pre> <br>";*/
+$Partidos_final = generarPartidos($Partidos, $participantes, $participantes_borrados, 0, count($participantes), $salida, 0);
+
+
+while (count($participantes_faltantes) > 0) {
+    $salida = addPartido($salida, array_pop($participantes_faltantes), array_pop($participantes_faltantes), false);
+};
 
 $query = "SELECT id_fecha FROM fechas_disponibles WHERE ronda = " . $numRonda;
 $result = mysqli_query($connection, $query);
@@ -228,17 +286,17 @@ $result = mysqli_query($connection, $query);
 $consolas = mysqli_fetch_array($result)['cantidad'];
 
 $partidos_aux = $salida;
+$partidos_fecha=array();
 for ($i=0; $i < $cant_fechas; $i++) { 
     for ($j=0; $j < $consolas; $j++) { 
         for ($k=1; $k < 6; $k++) { //hardodeados los horarios
             $asignado = false;
             foreach ($partidos_aux as $key => $value) {
-                if (($value[2] == $k) and !($asignado) ){
+                if (($value[2] == $k) and !($asignado)){
                     $partidos_fecha[] = array($value[0],$value[1],$value[2],$fechas[$i]);
                     unset($partidos_aux[$key]);
                     $partidos_aux = array_values($partidos_aux);
                     $asignado = true;
-                    //$partidos_aux = array_diff($partidos_aux, array($value[0],$value[1],$value[2]));
                 }                 
             }
         }
@@ -247,13 +305,14 @@ for ($i=0; $i < $cant_fechas; $i++) {
 
 /*
 echo "<pre>";
+echo "matcheados";
 print_r($partidos_fecha);
 echo "</pre> <br>";
 
 echo "<pre>";
+echo "auxiliar";
 print_r($partidos_aux);
-echo "</pre> <br>";
-*/
+echo "</pre> <br>";*/
 
 
 foreach ($partidos_fecha as $key => $value) {
@@ -263,8 +322,10 @@ foreach ($partidos_fecha as $key => $value) {
     };
 
 foreach ($partidos_aux as $key => $value) {
-     $query  = "INSERT INTO Partidos ( id_participante1, id_participante2, ronda,hora, flag_error) 
-        VALUES ('".$value[0]."','".$value[1] . "','" . $numRonda . "','" . $value[2]."','sin fecha')";
+    if($value[2]=="9")
+        $value[2]="5";
+     $query  = "INSERT INTO Partidos ( id_participante1, id_participante2, ronda,hora,fecha, flag_error) 
+        VALUES ('".$value[0]."','".$value[1] . "','" . $numRonda . "','" . $value[2]."','" . $fechas[$cant_fechas-1] . "' , 'sin fecha')";
         $result = mysqli_query($connection, $query);
 };
 
