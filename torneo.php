@@ -62,9 +62,11 @@
 					echo "<h1>Ronda " . $i . "</h1>";
 					$ronda = mysqli_query($con, 	"SELECT p.id_partido, 
 													part1.nombre as nombre1, 
-													part1.apellido as apellido1, 
+													part1.apellido as apellido1,
+													e1.equipo_desc as equipo1, 
 													part2.nombre as nombre2, 
 													part2.apellido as apellido2,
+													e2.equipo_desc as equipo2,
 													f.fecha,
 													h.horario,
 													p.goles1,
@@ -73,11 +75,15 @@
 															horarios h,
 															fechas_disponibles f,
 															Participantes part1,
-															Participantes part2
+															Participantes part2,
+															Equipos e1,
+															Equipos e2
 													where p.id_participante1	=	part1.id_inscripto
 													and p.id_participante2	=	part2.id_inscripto
 													and p.fecha	=	f.id_fecha
 													and p.hora	=	h.id_horario
+													and part1.id_equipo=e1.id_equipo
+													and part2.id_equipo=e2.id_equipo
 													and p.ronda='" . $i . "'
 													order by f.fecha,h.horario");
 					while($partido = mysqli_fetch_array($ronda))
@@ -90,6 +96,7 @@
 						}
 						echo '<h3>Partido #' . $partido['id_partido'] . '</h3>';
 						echo '<h3>' . $partido['nombre1'] . ' ' . $partido['apellido1'] . ' VS ' . $partido['nombre2'] . ' ' . $partido['apellido2'] . '</h3>';
+						echo '<h2>' . $partido['equipo1'] . '-' . $partido['equipo2'] . '</h2>';
 						if($partido['goles1'] or $partido['goles1']=='0'){
 							echo '<h3>' . $partido['goles1'] . '    :    ' . $partido['goles2'] . '</h3>';
 						}
