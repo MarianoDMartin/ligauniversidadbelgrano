@@ -1,6 +1,5 @@
 <?php  //Start the Session
 
-session_start();
 $connection = mysqli_connect('universys.site', 'apholos_dba', 'dbainub', 'apholos_ligaub');
 
 if (mysqli_connect_errno()) {
